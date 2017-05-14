@@ -60,6 +60,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
     public void onLoginSucceed(LoginResponse loginResponse) {
         startActivity(new Intent(this, FeedActivity.class));
         Toast.makeText(this, "Login succeed!", Toast.LENGTH_SHORT).show();
+
+        finish();
     }
 
     @Override

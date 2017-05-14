@@ -51,11 +51,7 @@ public class UserDetailsActivity extends BaseActivity implements UserDetailsView
         super.onResume();
         userDetailsPresenter.attachView(this);
 
-        final Intent startingIntent = getIntent();
-        if (startingIntent != null && startingIntent.hasExtra(EXTRA_USER_ID)) {
-            userDetailsPresenter.loadUserDetails(
-                    startingIntent.getLongExtra(EXTRA_USER_ID, Constants.NO_VALUE));
-        }
+        loadUserDataIfNeeded();
     }
 
     @Override
@@ -80,6 +76,17 @@ public class UserDetailsActivity extends BaseActivity implements UserDetailsView
             showProgressDialog("Loading user data...");
         } else {
             hideProgressDialog();
+        }
+    }
+
+    private void loadUserDataIfNeeded() {
+        final Intent startingIntent = getIntent();
+        if (startingIntent != null && startingIntent.hasExtra(EXTRA_USER_ID)) {
+            binding.getRoot().post(() -> userDetailsPresenter.loadUserDetails(
+                    startingIntent.getLongExtra(EXTRA_USER_ID, Constants.NO_VALUE)));
+        } else {
+            Toast.makeText(this, "Can't load user details. Please start activity with user id.",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }
