@@ -8,4 +8,8 @@ interface FeedView {
     void showPosts(List<PostModel> postModels);
 
     void onDownloadPostsError();
+
+    void onDownloadPostsStarted();
+
+    void onDownloadPostsFinished();
 }

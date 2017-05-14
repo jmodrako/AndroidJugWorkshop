@@ -60,6 +60,16 @@ public class FeedActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onDownloadPostsStarted() {
+        binding.feedSwipeRefresh.setRefreshing(true);
+    }
+
+    @Override
+    public void onDownloadPostsFinished() {
+        binding.feedSwipeRefresh.setRefreshing(false);
+    }
+
+    @Override
     public void onAuthorClick(UserModel userModel) {
         startActivity(UserDetailsActivity.forUserId(this, userModel.getId()));
     }
@@ -79,6 +89,9 @@ public class FeedActivity extends AppCompatActivity implements
 
         binding.feedRecyclerView.setLayoutManager(linearLayoutManager);
         binding.feedRecyclerView.setAdapter(feedAdapter);
+
+        binding.feedSwipeRefresh.setRefreshing(false);
+        binding.feedSwipeRefresh.setOnRefreshListener(() -> feedPresenter.loadPosts());
     }
 
     private void setupPresenter() {

@@ -42,9 +42,14 @@ class FeedPresenter extends BasePresenter<FeedView> {
                     Collections.shuffle(postModels);
                     return postModels;
                 })
-                .doOnError(throwable -> view().onDownloadPostsError())
-                .subscribe(result -> view().showPosts(result),
-                        error -> view().onDownloadPostsError());
+                .doOnSubscribe(disposable -> view().onDownloadPostsStarted())
+                .subscribe(result -> {
+                    view().onDownloadPostsFinished();
+                    view().showPosts(result);
+                }, error -> {
+                    view().onDownloadPostsFinished();
+                    view().onDownloadPostsError();
+                });
     }
 
     @Override
