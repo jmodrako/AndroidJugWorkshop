@@ -13,11 +13,6 @@ public class UserDetailsPresenter extends BasePresenter<UserDetailsView> {
         this.dataRepository = dataRepository;
     }
 
-    @Override
-    protected Class viewClass() {
-        return UserDetailsView.class;
-    }
-
     void loadUserDetails(long userId) {
         if (userId == Constants.NO_VALUE) {
             view().onUserShowError();
@@ -29,5 +24,10 @@ public class UserDetailsPresenter extends BasePresenter<UserDetailsView> {
                     .subscribe(user -> view().showUserDetails(user),
                             error -> view().onUserShowError());
         }
+    }
+
+    @Override
+    protected Class viewClass() {
+        return UserDetailsView.class;
     }
 }

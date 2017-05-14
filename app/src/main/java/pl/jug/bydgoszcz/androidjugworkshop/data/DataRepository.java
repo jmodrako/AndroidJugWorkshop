@@ -13,6 +13,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DataRepository implements JugApi {
+
+    private static final String API_URL = "https://jsonplaceholder.typicode.com";
+
     private final JugApi jugApi;
 
     public DataRepository() {
@@ -44,7 +47,7 @@ public class DataRepository implements JugApi {
                 .client(okHttpClientBuilder.build())
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://jsonplaceholder.typicode.com")
+                .baseUrl(API_URL)
                 .build().create(JugApi.class);
     }
 

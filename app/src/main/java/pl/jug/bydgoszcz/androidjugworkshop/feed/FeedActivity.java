@@ -17,6 +17,7 @@ import pl.jug.bydgoszcz.androidjugworkshop.feed.list.OnAuthorClickListener;
 import pl.jug.bydgoszcz.androidjugworkshop.feed.list.OnPostClickListener;
 import pl.jug.bydgoszcz.androidjugworkshop.feed.model.PostModel;
 import pl.jug.bydgoszcz.androidjugworkshop.feed.model.UserModel;
+import pl.jug.bydgoszcz.androidjugworkshop.user.UserDetailsActivity;
 
 public class FeedActivity extends AppCompatActivity implements
         FeedView, OnAuthorClickListener, OnPostClickListener {
@@ -60,7 +61,7 @@ public class FeedActivity extends AppCompatActivity implements
 
     @Override
     public void onAuthorClick(UserModel userModel) {
-        // startActivity(UserDetailsActivity.forUserId(this, userModel.getId()));
+        startActivity(UserDetailsActivity.forUserId(this, userModel.getId()));
     }
 
     @Override

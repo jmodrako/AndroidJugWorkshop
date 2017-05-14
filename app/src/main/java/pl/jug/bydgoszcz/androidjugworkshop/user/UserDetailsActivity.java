@@ -42,7 +42,7 @@ public class UserDetailsActivity extends BaseActivity implements UserDetailsView
     private void injectDependencies() {
         DaggerUserDetailsComponent.builder()
                 .userDetailsModule(new UserDetailsComponent.UserDetailsModule())
-//                .applicationComponent(getApplicationComponent())
+                .applicationComponent(getApplicationComponent())
                 .build().inject(this);
     }
 

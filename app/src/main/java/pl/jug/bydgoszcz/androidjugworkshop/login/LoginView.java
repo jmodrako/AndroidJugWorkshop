@@ -12,4 +12,6 @@ interface LoginView {
     void disableUi();
 
     void enableUi();
+
+    void onCredentialsNeeded();
 }

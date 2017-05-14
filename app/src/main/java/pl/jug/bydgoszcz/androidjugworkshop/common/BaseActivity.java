@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
+import pl.jug.bydgoszcz.androidjugworkshop.JugApplication;
+import pl.jug.bydgoszcz.androidjugworkshop.common.di.ApplicationComponent;
+
 public class BaseActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
@@ -15,8 +18,9 @@ public class BaseActivity extends AppCompatActivity {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
             progressDialog.setIndeterminate(true);
-            progressDialog.setMessage(message);
         }
+
+        progressDialog.setMessage(message);
 
         if (!progressDialog.isShowing()) progressDialog.show();
     }
@@ -25,5 +29,10 @@ public class BaseActivity extends AppCompatActivity {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
+    }
+
+    protected ApplicationComponent getApplicationComponent() {
+        final JugApplication application = (JugApplication) getApplication();
+        return application.getApplicationComponent();
     }
 }

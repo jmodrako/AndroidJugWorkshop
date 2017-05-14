@@ -6,6 +6,7 @@ import dagger.Provides;
 import pl.jug.bydgoszcz.androidjugworkshop.common.di.ApplicationComponent;
 import pl.jug.bydgoszcz.androidjugworkshop.common.di.PerActivity;
 import pl.jug.bydgoszcz.androidjugworkshop.data.DataRepository;
+import pl.jug.bydgoszcz.androidjugworkshop.user.UserDetailsActivity;
 import pl.jug.bydgoszcz.androidjugworkshop.user.UserDetailsPresenter;
 
 @PerActivity
@@ -13,7 +14,7 @@ import pl.jug.bydgoszcz.androidjugworkshop.user.UserDetailsPresenter;
         modules = {UserDetailsComponent.UserDetailsModule.class})
 public interface UserDetailsComponent {
 
-    // void inject(UserDetailsActivity userDetailsActivity);
+    void inject(UserDetailsActivity userDetailsActivity);
 
     @Module
     class UserDetailsModule {

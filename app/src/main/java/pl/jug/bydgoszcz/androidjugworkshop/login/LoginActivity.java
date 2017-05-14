@@ -1,5 +1,6 @@
 package pl.jug.bydgoszcz.androidjugworkshop.login;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import pl.jug.bydgoszcz.androidjugworkshop.R;
 import pl.jug.bydgoszcz.androidjugworkshop.common.BaseActivity;
 import pl.jug.bydgoszcz.androidjugworkshop.databinding.ActivityLoginBinding;
+import pl.jug.bydgoszcz.androidjugworkshop.feed.FeedActivity;
 import timber.log.Timber;
 
 public class LoginActivity extends BaseActivity implements LoginView {
@@ -56,7 +58,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void onLoginSucceed(LoginResponse loginResponse) {
-        // startActivity(new Intent(this, FeedActivity.class));
+        startActivity(new Intent(this, FeedActivity.class));
         Toast.makeText(this, "Login succeed!", Toast.LENGTH_SHORT).show();
     }
 
@@ -73,6 +75,11 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void enableUi() {
         enableUi(true);
+    }
+
+    @Override
+    public void onCredentialsNeeded() {
+        Toast.makeText(this, "Provide proper credentials!", Toast.LENGTH_SHORT).show();
     }
 
     private void enableUi(boolean enabled) {
@@ -99,7 +106,11 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 RxView.clicks(binding.mainButtonLogin)
                         .debounce(500, TimeUnit.MILLISECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(o -> presenter.handleLoginClick("login", "pass"))
+                        .subscribe(o -> {
+                            final String loginValue = binding.mainUsernameInput.getText().toString();
+                            final String passwordValue = binding.mainPasswordInput.getText().toString();
+                            presenter.handleLoginClick(loginValue, passwordValue);
+                        })
         );
     }
 }

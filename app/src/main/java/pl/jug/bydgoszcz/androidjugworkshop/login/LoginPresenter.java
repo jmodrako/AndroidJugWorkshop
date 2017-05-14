@@ -16,24 +16,34 @@ class LoginPresenter extends BasePresenter<LoginView> {
     }
 
     void handleLoginClick(String userName, String password) {
-        final Disposable loginDisposable = callServer(userName, password)
-                .doOnSubscribe(disposable -> {
-                    final LoginView loginView = view();
-                    loginView.disableUi();
-                    loginView.showLoading();
-                })
-                .subscribe(loginResponse -> {
-                    final LoginView loginView = view();
-                    loginView.enableUi();
-                    loginView.hideLoading();
-                    loginView.onLoginSucceed(loginResponse);
-                }, throwable -> {
-                    final LoginView loginView = view();
-                    loginView.enableUi();
-                    loginView.onLoginFailed();
-                });
+        if (isValidInput(userName, password)) {
+            final Disposable loginDisposable = callServer(userName, password)
+                    .doOnSubscribe(disposable -> {
+                        final LoginView loginView = view();
+                        loginView.disableUi();
+                        loginView.showLoading();
+                    })
+                    .subscribe(loginResponse -> {
+                        final LoginView loginView = view();
+                        loginView.enableUi();
+                        loginView.hideLoading();
+                        loginView.onLoginSucceed(loginResponse);
+                    }, throwable -> {
+                        final LoginView loginView = view();
+                        loginView.enableUi();
+                        loginView.onLoginFailed();
+                    });
 
-        disposables.add(loginDisposable);
+            // we have to remember work to properly handle detaching view
+            disposables.add(loginDisposable);
+        } else {
+            view().onCredentialsNeeded();
+        }
+    }
+
+    private boolean isValidInput(String userName, String password) {
+        return userName != null && !userName.isEmpty() &&
+                password != null && !password.isEmpty();
     }
 
     private Single<LoginResponse> callServer(String userName, String password) {

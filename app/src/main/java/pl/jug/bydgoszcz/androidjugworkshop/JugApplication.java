@@ -2,6 +2,8 @@ package pl.jug.bydgoszcz.androidjugworkshop;
 
 import android.app.Application;
 
+import pl.jug.bydgoszcz.androidjugworkshop.common.di.ApplicationComponent;
+import pl.jug.bydgoszcz.androidjugworkshop.common.di.DaggerApplicationComponent;
 import timber.log.Timber;
 
 public class JugApplication extends Application {
