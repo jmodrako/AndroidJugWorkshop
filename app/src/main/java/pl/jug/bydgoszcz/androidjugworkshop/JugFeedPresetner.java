@@ -25,7 +25,6 @@ class JugFeedPresetner {
 
     void loadPosts() {
         final Api api = connection.getApi();
-
         final Observable<List<JugPostModel>> singlePosts = api.posts().toObservable();
         final Observable<List<JugUserModel>> singleUsers = api.users().toObservable();
 
@@ -40,7 +39,8 @@ class JugFeedPresetner {
                         }
                     }
                     return posts;
-                }).subscribeOn(Schedulers.io())
+                })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(models -> view.showNewPosts(models));
 

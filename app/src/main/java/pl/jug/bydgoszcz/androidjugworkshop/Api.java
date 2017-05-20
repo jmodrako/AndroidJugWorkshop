@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 interface Api {
 
@@ -12,4 +13,7 @@ interface Api {
 
     @GET("/users")
     Single<List<JugUserModel>> users();
+
+    @GET("/users/{id}")
+    Single<JugUserModel> userById(@Path("id") long id);
 }
