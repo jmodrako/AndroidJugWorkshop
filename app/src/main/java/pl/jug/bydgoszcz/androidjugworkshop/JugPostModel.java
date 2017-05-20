@@ -9,6 +9,11 @@ public class JugPostModel {
     private String title;
     private String body;
 
+    // TODO For tests.
+    public String imageUrl() {
+        return "http://www.dfhtechnologies.com/images/user.png";
+    }
+
     public long getUserId() {
         return userId;
     }

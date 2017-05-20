@@ -38,11 +38,12 @@
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
+                android:id="@+id/list_item_feed_author_image"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="12dp"
                 android:contentDescription="@null"/>
-                <!--app:imageUrl="@{model.user.imageUrl}"-->
+            <!--app:imageUrl="@{model.user.imageUrl}"-->
 
             <TextView
                 android:layout_width="match_parent"

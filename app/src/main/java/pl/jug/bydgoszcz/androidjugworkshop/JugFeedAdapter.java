@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,13 @@ class JugFeedAdapter extends RecyclerView.Adapter<JugFeedAdapter.JugPostViewHold
     public void onBindViewHolder(JugPostViewHolder holder, int position) {
         final JugPostModel model = data.get(position);
         holder.binding.setModel(model);
+
+        final ImageView authorImageView = holder.binding.listItemFeedAuthorImage;
+
+        Picasso
+                .with(holder.binding.getRoot().getContext())
+                .load(model.imageUrl())
+                .into(authorImageView);
 
         final Context context = holder.binding.getRoot().getContext();
 
