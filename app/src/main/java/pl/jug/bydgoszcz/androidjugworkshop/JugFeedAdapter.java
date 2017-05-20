@@ -13,17 +13,20 @@ import java.util.List;
 
 import pl.jug.bydgoszcz.androidjugworkshop.databinding.ListItemFeedPostBinding;
 
-public class JugFeedAdapter extends RecyclerView.Adapter<JugFeedAdapter.JugPostViewHolder> {
+class JugFeedAdapter extends RecyclerView.Adapter<JugFeedAdapter.JugPostViewHolder> {
 
     private List<JugPostModel> data = new ArrayList<>();
 
+    private LayoutInflater layoutInflater;
+
+    JugFeedAdapter(Context context) {
+        this.layoutInflater = LayoutInflater.from(context);
+    }
+
     @Override
     public JugPostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final LayoutInflater li = LayoutInflater.from(parent.getContext());
-
         final ListItemFeedPostBinding binding = DataBindingUtil.inflate(
-                li, R.layout.list_item_feed_post, parent, false);
-
+                layoutInflater, R.layout.list_item_feed_post, parent, false);
         return new JugPostViewHolder(binding);
     }
 
