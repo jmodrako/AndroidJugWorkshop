@@ -4,23 +4,25 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.Toast;
 
 import java.util.List;
 
 import pl.jug.bydgoszcz.androidjugworkshop.databinding.ActivityJugFeedBinding;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class JugFeedActivity extends AppCompatActivity {
+public class JugFeedActivity extends AppCompatActivity implements JugFeedView {
 
-    private JugFeedAdapter adapter ;
+    private JugFeedAdapter adapter;
+    private JugFeedPresetner presetner;
+    private ActivityJugFeedBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityJugFeedBinding binding = DataBindingUtil.
+        binding = DataBindingUtil.
                 setContentView(this, R.layout.activity_jug_feed);
+
+        presetner = new JugFeedPresetner(new Connection());
 
         adapter = new JugFeedAdapter(this);
         final LinearLayoutManager lm = new LinearLayoutManager(
@@ -28,29 +30,32 @@ public class JugFeedActivity extends AppCompatActivity {
 
         binding.feedRecyclerView.setAdapter(adapter);
         binding.feedRecyclerView.setLayoutManager(lm);
+
+        binding.feedSwipeRefresh.setOnRefreshListener(() -> presetner.loadPosts());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        presetner.attach(this);
+        presetner.loadPosts();
+    }
 
-        final Connection connection = new Connection();
-        final Api api = connection.getApi();
+    @Override
+    protected void onPause() {
+        presetner.detach();
+        super.onPause();
+    }
 
-        api.posts().enqueue(new Callback<List<JugPostModel>>() {
-            @Override
-            public void onResponse(
-                    Call<List<JugPostModel>> call,
-                    Response<List<JugPostModel>> response) {
+    @Override
+    public void showNewPosts(List<JugPostModel> models) {
+        adapter.setData(models);
+        adapter.notifyDataSetChanged();
+        binding.feedSwipeRefresh.setRefreshing(false);
+    }
 
-                final List<JugPostModel> models = response.body();
-                adapter.setData(models);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<JugPostModel>> call, Throwable t) {
-            }
-        });
+    @Override
+    public void onPostsDownloadFailed() {
+        Toast.makeText(this, "Can't download posts!", Toast.LENGTH_SHORT).show();
     }
 }
