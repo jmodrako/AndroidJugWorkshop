@@ -6,12 +6,12 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-class JugFeedPresetner {
+class JugFeedPresenter {
 
     private final Connection connection;
     private JugFeedView view;
 
-    JugFeedPresetner(Connection connection) {
+    JugFeedPresenter(Connection connection) {
         this.connection = connection;
     }
 

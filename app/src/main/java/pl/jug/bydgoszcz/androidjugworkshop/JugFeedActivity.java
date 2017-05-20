@@ -13,7 +13,7 @@ import pl.jug.bydgoszcz.androidjugworkshop.databinding.ActivityJugFeedBinding;
 public class JugFeedActivity extends AppCompatActivity implements JugFeedView {
 
     private JugFeedAdapter adapter;
-    private JugFeedPresetner presetner;
+    private JugFeedPresenter presetner;
     private ActivityJugFeedBinding binding;
 
     @Override
@@ -22,7 +22,7 @@ public class JugFeedActivity extends AppCompatActivity implements JugFeedView {
         binding = DataBindingUtil.
                 setContentView(this, R.layout.activity_jug_feed);
 
-        presetner = new JugFeedPresetner(new Connection());
+        presetner = new JugFeedPresenter(new Connection());
 
         adapter = new JugFeedAdapter(this);
         final LinearLayoutManager lm = new LinearLayoutManager(
