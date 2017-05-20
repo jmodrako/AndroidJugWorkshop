@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -47,19 +46,11 @@ class JugFeedAdapter extends RecyclerView.Adapter<JugFeedAdapter.JugPostViewHold
 
         final Context context = holder.binding.getRoot().getContext();
 
-        holder.binding.listItemFeedAuthorSection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, model.getTitle(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.binding.listItemFeedAuthorSection.setOnClickListener(v ->
+                Toast.makeText(context, model.getTitle(), Toast.LENGTH_SHORT).show());
 
-        holder.binding.listItemFeedContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, model.getBody(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.binding.listItemFeedContainer.setOnClickListener(v ->
+                Toast.makeText(context, model.getBody(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
