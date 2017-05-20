@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="RtlHardcoded">
+
+    <data>
+
+        <variable
+            name="model"
+            type="pl.jug.bydgoszcz.androidjugworkshop.JugPostModel"/>
+
+        <!--<variable-->
+        <!--name="onAuthorClickListener"-->
+        <!--type="pl.jug.bydgoszcz.androidjugworkshop.feed.list.OnAuthorClickListener"/>-->
+        <!--<variable-->
+        <!--name="onPostClickListener"-->
+        <!--type="pl.jug.bydgoszcz.androidjugworkshop.feed.list.OnPostClickListener"/>-->
+    </data>
+
+    <LinearLayout
+        android:id="@+id/list_item_feed_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/list_item_feed_author_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="12dp"
+                android:contentDescription="@null"/>
+                <!--app:imageUrl="@{model.user.imageUrl}"-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.user.name}"
+                android:textColor="#2c2c2c"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{model.title}"
+            android:textColor="#2c2c2c"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@{model.body}"
+            android:textColor="#cccccc"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+</layout>
