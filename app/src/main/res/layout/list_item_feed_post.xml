@@ -42,13 +42,14 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="12dp"
-                android:contentDescription="@null"/>
-            <!--app:imageUrl="@{model.user.imageUrl}"-->
+                android:contentDescription="@null"
+                app:hide='@{model.title.contains("a")}'/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{model.user.name}"
-                android:textColor="#2c2c2c"
+                android:textColor='@{model.title.contains("a") ? @color/colorPrimary : @color/colorAccent}'
                 android:textSize="16sp"/>
 
         </LinearLayout>
