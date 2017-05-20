@@ -14,7 +14,7 @@ import retrofit2.Response;
 
 public class JugFeedActivity extends AppCompatActivity {
 
-    private JugFeedAdapter adapter = new JugFeedAdapter();
+    private JugFeedAdapter adapter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class JugFeedActivity extends AppCompatActivity {
         final ActivityJugFeedBinding binding = DataBindingUtil.
                 setContentView(this, R.layout.activity_jug_feed);
 
+        adapter = new JugFeedAdapter(this);
         final LinearLayoutManager lm = new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, false);
 
