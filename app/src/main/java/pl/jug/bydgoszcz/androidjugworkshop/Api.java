@@ -2,10 +2,14 @@ package pl.jug.bydgoszcz.androidjugworkshop;
 
 import java.util.List;
 
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 
 interface Api {
+
     @GET("/posts")
-    Call<List<JugPostModel>> posts();
+    Single<List<JugPostModel>> posts();
+
+    @GET("/users")
+    Single<List<JugUserModel>> users();
 }

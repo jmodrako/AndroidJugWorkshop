@@ -2,6 +2,7 @@ package pl.jug.bydgoszcz.androidjugworkshop;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 class Connection {
@@ -17,6 +18,7 @@ class Connection {
                 .baseUrl(API_URL)
                 .client(okHttpClient)
                 .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(Api.class);
     }
